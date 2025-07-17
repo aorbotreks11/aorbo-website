@@ -4,6 +4,9 @@ from django.core.paginator import Paginator
 import json
 from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
+from django.shortcuts import render
+
+
 
 @api_view(['POST'])
 @throttle_classes([AnonRateThrottle, UserRateThrottle])
@@ -172,6 +175,11 @@ def contact(request):
 
 def privacy_policy(request):
     return render(request, 'privacypolicy.html')
+def terms_and_conditions(request):
+    return render(request, 'terms_and_conditions.html')
+def user_agreement(request):
+    return render(request, 'user_agreement.html')
+
 
 
 

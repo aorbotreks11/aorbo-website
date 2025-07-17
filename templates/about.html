@@ -5,7 +5,6 @@
 
 {% block extra_css %}
 <style>
-    /* About Section */
     .about-container {
         max-width: 1440px;
         margin: 50px auto;
@@ -22,12 +21,10 @@
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.25rem;
-        padding-bottom: 0;
         background: linear-gradient(45deg, #2563eb, #3b82f6);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        text-fill-color: transparent;
         display: flex;
     }
 
@@ -48,6 +45,7 @@
         color: #666;
         line-height: 1.8;
         font-size: 1rem;
+        position: relative;
     }
 
     .feature-list {
@@ -75,7 +73,6 @@
         margin-right: 0.75rem;
     }
 
-    /* Ready to Explore Section */
     .ready-explore {
         background: linear-gradient(135deg, #2563eb, #3b82f6);
         padding: 2rem;
@@ -103,59 +100,47 @@
         height: auto;
         margin-top: 1rem;
     }
-    
+
     .about-left {
         flex: 2;
     }
 
     .about-right {
         flex: 1;
-        top: 0;
         align-self: flex-start;
     }
 
     .image-stack {
         position: relative;
-        width: 50%;
-        height: 250px;
-        margin-left: auto;
-        margin-right: 50px;
-    }
-
-    .bottom-image {
-        position: absolute;
-        top: 0px;
-        right: 0;
-        width: 50%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 16px;
-        z-index: 1;
-    }
-
-    .top-image {
-        position: absolute;
-        top: 0px;
-        right: 0;
-        width: 50%;
-        height: 100%;
-        z-index: 2;
-    }
-    
-    .mission-image {
-        max-width: 50%;
+        width: 100%;
+        max-width: 250px;
         height: auto;
-        margin-left: 20px;
+        margin-left: auto;
+        margin-right: 20px;
     }
-    
-    /* Team Members Styles */
+
+    .bottom-image,
+    .top-image {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        border-radius: 16px;
+        display: block;
+        position: relative;
+    }
+
+    .mission-image {
+        max-width: 100%;
+        height: auto;
+    }
+
     .team-members-container {
         display: flex;
         flex-wrap: wrap;
         gap: 2rem;
         margin-top: 2rem;
     }
-    
+
     .team-member {
         flex: 1;
         min-width: 250px;
@@ -166,12 +151,12 @@
         padding: 1.5rem;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
+
     .team-member:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     }
-    
+
     .team-member-photo {
         width: 100%;
         height: 200px;
@@ -179,43 +164,30 @@
         border-radius: 8px;
         margin-bottom: 1rem;
     }
-    
+
     .team-member h3 {
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
         color: #2563eb;
     }
-    
+
     .team-member-position {
         font-size: 0.9rem;
         font-weight: 500;
         color: #666;
         margin-bottom: 1rem;
     }
-    
+
     .team-member-bio {
         font-size: 0.9rem;
         line-height: 1.6;
         color: #555;
     }
-    
-    /* Responsiveness */
+
     @media (max-width: 768px) {
         .about-content {
             flex-direction: column;
-        }
-
-        .about-right {
-            position: static;
-        }
-
-        .image-stack {
-            height: 300px;
-        }
-
-        .top-image {
-            width: 100px;
         }
 
         .section-title {
@@ -225,29 +197,57 @@
         .bottom-image-ready {
             max-width: 200px;
         }
-        
+
         .team-members-container {
             justify-content: center;
+        }
+
+        .content-section p.truncated {
+            max-height: 80px;
+            overflow: hidden;
+        }
+
+        .content-section p.truncated::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3rem;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white);
+        }
+
+        .view-toggle-btn {
+            display: inline-block;
+            /* margin-top: 0.5rem; */
+            font-size: 0.9rem;
+            color: #2563eb;
+            cursor: pointer;
+        }
+    }
+
+    @media (min-width: 769px) {
+        .view-toggle-btn {
+            display: none;
         }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- About Us Section -->
 <main class="about-container">
     <div class="about-content">
-        <!-- Left Content -->
         <div class="about-left">
             <div style="display: flex;">
                 <h1 class="section-title">About us</h1>
                 <div class="about-right">
                     <div class="image-stack">
-                        <img src="{% static 'images/conference.png' %}" alt="Bottom Right Image" class="bottom-image">
-                        <img src="{% static 'images/stars.jpg' %}" alt="Top Right Image" class="top-image">
+                        <img src="{% static 'images/Untitled.png' %}" alt="Bottom Right Image" class="bottom-image">
+                        <!-- <img src="{% static 'images/stars.jpg' %}" alt="Top Right Image" class="top-image"> -->
                     </div>
                 </div>
             </div>
+
             <div class="content-sections">
                 <section class="content-section">
                     <h2>Who Are We?</h2>
@@ -299,33 +299,40 @@
                     <p>Join us at Aorbo Treks and embark on a journey that's filled with excitement, adventure, and unforgettable experiences. Let's make trekking an adventure of a lifetime—one trail at a time!</p>
                     <img src="{% static 'images/about_us botton.jpg' %}" alt="Bottom Image" class="bottom-image-ready">
                 </section>
-                
-                <!-- Team Members Section -->
-                <section class="content-section">
-                    <h2>Meet Our Team</h2>
-                    <p>The passionate individuals behind Aorbo Treks who make your adventures possible.</p>
-                    
-                    <div class="team-members-container">
-                        {% if team_members %}
-                            {% for member in team_members %}
-                                <div class="team-member">
-                                    {% if member.photo %}
-                                        <img src="{{ member.photo.url }}" alt="{{ member.name }}" class="team-member-photo">
-                                    {% else %}
-                                        <img src="{% static 'images/default-profile.jpg' %}" alt="{{ member.name }}" class="team-member-photo">
-                                    {% endif %}
-                                    <h3>{{ member.name }}</h3>
-                                    <p class="team-member-position">{{ member.position }}</p>
-                                    <p class="team-member-bio">{{ member.bio|truncatewords:30 }}</p>
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            <p>Our team information is being updated. Check back soon!</p>
-                        {% endif %}
-                    </div>
-                </section>
             </div>
         </div>
     </div>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function applyToggleLogic() {
+            const paragraphs = document.querySelectorAll('.content-section p');
+            paragraphs.forEach(function (para) {
+                const existingToggle = para.parentNode.querySelector('.view-toggle-btn');
+                if (window.innerWidth <= 768 && para.scrollHeight > 120 && !existingToggle) {
+                    para.classList.add('truncated');
+
+                    const toggle = document.createElement('span');
+                    toggle.classList.add('view-toggle-btn');
+                    toggle.textContent = 'View More';
+                    para.parentNode.appendChild(toggle);
+
+                    toggle.addEventListener('click', function () {
+                        para.classList.toggle('truncated');
+                        toggle.textContent = para.classList.contains('truncated') ? 'View More' : 'View Less';
+                    });
+                }
+            });
+        }
+
+        applyToggleLogic();
+
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.view-toggle-btn').forEach(el => el.remove());
+            document.querySelectorAll('.content-section p').forEach(p => p.classList.remove('truncated'));
+            applyToggleLogic();
+        });
+    });
+</script>
 {% endblock %}
